@@ -2,6 +2,7 @@ package com.gianco.telegram.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -13,8 +14,10 @@ import java.util.List;
 @Service
 public class TelegramService extends TelegramLongPollingBot {
     private static final Logger logger = LoggerFactory.getLogger(TelegramService.class);
-    public static final Long CHAT_ID = 534066544L;
-    public static final Long CHAT_ID_CHANNEL = -1001466692277L;
+    @Value("${chat_id}")
+    public Long chatId;
+    @Value("${chat_id_channel}")
+    public Long chatIdChannel;
 
     String botUser = "giancoSsnBot";
 
@@ -37,7 +40,7 @@ public class TelegramService extends TelegramLongPollingBot {
 
     public void sendMessageReceived(String text) {
         try {
-            execute(createMessage(CHAT_ID_CHANNEL, text));
+            execute(createMessage(chatIdChannel, text));
         } catch (TelegramApiException e) {
             logger.error(e.getMessage());
         }
