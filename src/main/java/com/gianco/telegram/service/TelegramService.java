@@ -41,6 +41,7 @@ public class TelegramService extends TelegramLongPollingBot {
     public void sendMessageReceived(String text) {
         try {
             execute(createMessage(chatIdChannel, text));
+            logger.info(text);
         } catch (TelegramApiException e) {
             logger.error(e.getMessage());
         }
