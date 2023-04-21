@@ -1,2 +1,5 @@
 server:
   port: 8082
+
+chat_id: xxxxx
+chat_id_channel: xxxxx
